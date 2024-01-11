@@ -4,6 +4,8 @@ import {BsSearch} from 'react-icons/bs'
 import ProfileDetails from '../ProfileDetails'
 import './index.css'
 
+const jobLocations = ['Hyderabad', 'Bangalore', 'Chennai', 'Delhi', 'Mumbai']
+
 const FiltersGroup = props => {
   const onChangeSearchInput = event => {
     const {changeSearchInput} = props
@@ -115,6 +117,28 @@ const FiltersGroup = props => {
     )
   }
 
+  const renderJobLocations = () => {
+    const {updateJobLocation} = props
+    return (
+      <div className="salary-range-container">
+        <h1 className="salary-range-heading">Job Location</h1>
+        <ul className="employment-type-list-container">
+          {jobLocations.map(eachLocation => (
+            <li key={eachLocation}>
+              <input
+                type="checkbox"
+                id={eachLocation}
+                name={eachLocation.toUpperCase()}
+                onChange={updateJobLocation}
+              />
+              <label htmlFor={eachLocation}>{eachLocation}</label>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="filters-group-container">
       {renderSearchInput()}
@@ -123,6 +147,9 @@ const FiltersGroup = props => {
       {renderTypeOfEmployment()}
       <hr className="horizontal-line" />
       {renderSalaryRange()}
+      <hr className="separator" />
+      <h1>Job Locations</h1>
+      {renderJobLocations()}
     </div>
   )
 }
